@@ -1,0 +1,523 @@
+<html>
+
+<head>
+    <style>
+        body,
+        button,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        i,
+        iframe,
+        img,
+        input,
+        li,
+        ol,
+        p,
+        span,
+        textarea,
+        ul {
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            -webkit-text-size-adjust: none
+        }
+
+        address,
+        i {
+            font-style: normal
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        body {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            font-weight: 400;
+            font-size: 12px;
+            font-family: "PingFang SC", "Helvetica Neue", 微软雅黑, Helvetica, Arial, sans-serif;
+        }
+
+        article,
+        aside,
+        audio,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        mark,
+        menu,
+        nav,
+        option,
+        path,
+        section,
+        select,
+        summary,
+        svg,
+        time,
+        video {
+            display: block;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+        }
+
+        input,
+        select,
+        textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none
+        }
+
+        button,
+        input:focus,
+        textarea:focus {
+            outline: 0;
+            border: none;
+            background: 0 0;
+            box-shadow: none;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+        }
+
+        a {
+            color: #353535;
+            text-decoration: none
+        }
+
+        ::-webkit-input-placeholder {
+            color: #b2b2b2
+        }
+
+        #app {}
+
+        #content {
+            /* display: flex;
+                align-items: flex-start; */
+            padding: 40px 0 0 300px;
+        }
+
+        .left {
+            position: fixed;
+            z-index: 2;
+            top: 60px;
+            left: 0;
+            box-sizing: border-box;
+            padding: 40px;
+            margin: 0 30px 0 0;
+
+        }
+
+        .left .title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #3a3a3a;
+            line-height: 30px;
+            margin: 0 0 15px;
+        }
+
+
+        .left .list-section {
+            margin: 0 0 40px 0;
+        }
+
+
+        .left .list-section li {
+            padding: 5px 0;
+        }
+
+        .left .list-section p {
+            font-weight: 350;
+            line-height: 20px;
+            color: #777;
+            display: inline-block;
+        }
+
+        .left .list li:hover p {
+            color: #555;
+            cursor: pointer;
+        }
+
+        .left .list li.on p {
+            color: #555;
+            font-weight: bold;
+            border-bottom: 1px solid #555;
+        }
+
+        #header {
+            box-sizing: border-box;
+            padding: 0 40px;
+            position: fixed;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background: #fff;
+        }
+
+        #header .logo {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='48' viewBox='0 0 260 48'%3E%3Cpath d='M82.074 10.783h33.594v6.122h4.061V6.848h-18.828V2.311H96.84v4.537H78.013v10.058h4.061v-6.123zm18.543 29.801V31.5h13.543v-3.936h-13.543v-7.707h12.18v-3.936H84.944v3.936h11.612v19.151c-8.41-4.196-8.654-10.779-8.66-11.089l-.086.001c.073-.824.08-1.345.08-1.444l.006-3.17-4.061-.007-.006 3.161c-.001.108-.181 10.869-7.885 16.478l2.44 3.147c4.194-3.054 6.535-7.212 7.845-10.916 1.999 3.191 5.667 6.718 12.411 8.963 3.069 1.022 7.243 1.233 11.849 1.233 1.596 0 3.245-.025 4.917-.051 1.749-.027 3.558-.055 5.356-.055v-3.936c-1.829 0-3.655.028-5.42.055-5.772.087-11.217.157-14.725-.794zm55.13-20.545h-13.209v3.936h13.209v-3.936zm.677-16.908h-13.886v3.936h13.886V3.131zM142.539 15.52h16.055v-3.936h-16.055v3.936zm23.963-8.098H177.5v11.916h6.703v-3.936h-2.642V3.486H162.84l-1.659 15.512 4.04.406 1.281-11.982zm17.531 16.746l.175-2.124h-22.482l.175 2.124c.032.39.663 6.709 7.761 13.039-2.974 1.923-6.496 3.572-10.485 4.894l1.315 3.724c5.234-1.735 9.307-3.83 12.476-6.024 3.168 2.194 7.241 4.289 12.476 6.024l1.315-3.724c-3.989-1.322-7.511-2.971-10.485-4.894 7.096-6.33 7.727-12.649 7.759-13.039zm-11.066 10.599c-1.578-1.335-2.928-2.768-4.031-4.288-1.267-1.745-2.004-3.322-2.428-4.5h12.919c-.425 1.179-1.161 2.756-2.428 4.5-1.104 1.52-2.455 2.953-4.032 4.288zm68.782-18.627V2.311h-4.061V16.14h-11.25v3.936h11.25v24.98h4.061v-24.98H253V16.14h-11.251zM141.556 44.345h15.564V28.876h-15.564v15.469zm4.062-11.533h7.441v7.598h-7.441v-7.598zM41.809 2.715h-4.061v3.662H23.86V4.218H9.397v3.936h5.297v7.352H9.397v3.936h5.297v.311L7.5 37.979l3.793 1.406 3.4-8.615v13.925h4.061V19.441h5.105v-3.936h-5.105V8.154h4.884v2.159h32.281V6.377h-14.11V2.715zm6.789 10.747H30.959v9.478h-7.263v21.755h4.061v-17.82h3.202v14.5h17.639v-14.5H51.8v17.82h4.061V22.94h-7.263v-9.478zM44.537 37.44H35.02V26.875h9.517V37.44zm0-14.5H35.02v-5.543h9.517v5.543zm177.554-2.901h-13.209v3.936h13.209v-3.936zm.676-16.908h-13.886v3.936h13.886V3.131zM208.882 15.52h16.055v-3.936h-16.055v3.936zm-.757 28.825h16.015V28.876h-16.015v15.469zm4.062-11.533h7.892v7.598h-7.892v-7.598z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-size: 100% auto;
+            width: 110px;
+            height: 60px;
+        }
+
+        .h2 {
+            margin: 0 0 5px 0;
+        }
+
+        .h2-desc {
+            color: #aaa;
+            margin: 0 0 40px 0;
+        }
+
+        a {
+            color: rgb(110, 60, 226)
+        }
+
+        .right {
+            padding: 60px 0 0 0;
+        }
+
+        .right .list {
+            margin: 0 0 50px -10px;
+        }
+
+        .right .list .img-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 280px;
+            height: 280px;
+            display: block;
+            background: #f8f8f8;
+            margin: 0 0 15px 0;
+        }
+
+        .right .list .img-wrapper:before {
+            content: "暂无缩略图";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            top: 50%;
+            line-height: 50px;
+            margin: -25px 0 0 0;
+            color: #dcdcdc;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 1px;
+
+        }
+
+        .right .list .img-wrapper p {
+            position: relative;
+            z-index: 2;
+            width: 280px;
+            height: 280px;
+            background-size: 100% auto;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .right .list li {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            margin: 0 10px 20px;
+        }
+
+        .right .list li .id {
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            bottom: 30px;
+            color: #b2b2b2;
+        }
+
+        .right .list li .p {
+            margin: 0 0 5px 0;
+            color: #777;
+        }
+
+        .right .list li .userId {
+            margin: 0 0 0 8px;
+            color: #555;
+        }
+
+        .right {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div id="header">
+            <div class="logo"></div>
+        </div>
+        <div id="content">
+            <div class="left">
+                <div class="list-section">
+                    <h3 class="title on">全部统计</h3>
+                    <ul>
+                        <li>
+                            <p>模板数量： <span v-text="list.length"></span>张</p>
+                        </li>
+                        <li>
+                            <p>更新时间： <span>2018/01/25 19:00</span></p>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="list-section">
+                    <h3 class="title">电商模板统计</h3>
+                    <ul class="list">
+                        <li>
+                            <p>全部（<span v-text="ztList.length + bannerList.length"></span>）</p>
+                        </li>
+                        <li>
+                            <p>主图直通车（<span v-text="ztList.length"></span>）</p>
+                        </li>
+                        <li>
+                            <p>电商banner（<span v-text="bannerList.length"></span>）</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-section">
+                    <h3 class="title">新媒体模板统计</h3>
+                    <ul class="list">
+                        <li>
+                            <p>全部（<span v-text="stList.length + ctList.length + sjList.length + ewmList.length"></span>）</li>
+                        <li>
+                            <p>公众号首图（<span v-text="ztList.length + bannerList.length"></span>）</p>
+                        </li>
+                        <li>
+                            <p>公众号次图（<span v-text="ztList.length + bannerList.length"></span>）</p>
+                        </li>
+                        <li>
+                            <p>手机海报（<span v-text="ztList.length + bannerList.length"></span>）</p>
+                        </li>
+                        <li>
+                            <p>关注二维码（<span v-text="ztList.length + bannerList.length"></span>）</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+
+                <div>
+                    <h2 class="h2">No.1 模板 <span>| 共使用了 {{max3[1].count}} 次</span></h2>
+                    <div class="h2-desc">
+                        <ul>
+                            <li>
+                                模板ID：<span><a target="_blank">{{max3[1].el}}</a></span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <ul class="list">
+                        <li v-for="item in max1List">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                            </a>
+                            <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                    v-text="item.user_id"></a></p>
+                            <p class="p">下载时间：{{item.updated_at}}</p>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                        </li>
+                    </ul>
+
+                    <h2 class="h2">No.2 模板 <span>| 共使用了 {{max3[2].count}} 次</span></h2>
+                    <div class="h2-desc">
+                        <ul>
+                            <li>
+                                模板ID：<span><a target="_blank">{{max3[2].el}}</a></span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <ul class="list">
+                        <li v-for="item in max2List">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                            </a>
+                            <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                    v-text="item.user_id"></a></p>
+                            <p class="p">下载时间：{{item.updated_at}}</p>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                        </li>
+                    </ul>
+
+
+                    <h2 class="h2">No.3 模板 <span>| 共使用了 {{max3[3].count}} 次</span></h2>
+                    <div class="h2-desc">
+                        <ul>
+                            <li>
+                                模板ID：<span><a target="_blank">{{max3[3].el}}</a></span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <ul class="list">
+                        <li v-for="item in max3List">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                            </a>
+                            <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                    v-text="item.user_id"></a></p>
+                            <p class="p">下载时间：{{item.updated_at}}</p>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                        </li>
+                    </ul>
+
+
+                    <h2 class="h2">No.1 模板 <span>| 共使用了 {{max3[4].count}} 次</span></h2>
+                    <div class="h2-desc">
+                        <ul>
+                            <li>
+                                模板ID：<span><a target="_blank">{{max3[4].el}}</a></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="list">
+                        <li v-for="item in max4List">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                            </a>
+                            <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                    v-text="item.user_id"></a></p>
+                            <p class="p">下载时间：{{item.updated_at}}</p>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                <div>
+
+
+                    <details>
+                        <summary>点击展开全部模板</summary>
+                        <ul class="list">
+                            <li v-for="item in ztList">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                    <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                                </a>
+                                <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                        v-text="item.user_id"></a></p>
+                                <p class="p">下载时间：{{item.updated_at}}</p>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            </li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>点击展开全部模板</summary>
+                        <ul class="list">
+                            <li v-for="item in bannerList">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                    <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                                </a>
+                                <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                        v-text="item.user_id"></a></p>
+                                <p class="p">下载时间：{{item.updated_at}}</p>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            </li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>点击展开全部模板</summary>
+                        <ul class="list">
+                            <li v-for="item in stList">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                    <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                                </a>
+                                <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                        v-text="item.user_id"></a></p>
+                                <p class="p">下载时间：{{item.updated_at}}</p>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            </li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>点击展开全部模板</summary>
+                        <ul class="list">
+                            <li v-for="item in ct2List">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                    <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                                </a>
+                                <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                        v-text="item.user_id"></a></p>
+                                <p class="p">下载时间：{{item.updated_at}}</p>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            </li>
+                        </ul>
+                    </details>
+
+
+                    <details>
+                        <summary>点击展开全部模板</summary>
+                        <ul class="list">
+                            <li v-for="item in sjList">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                    <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                                </a>
+                                <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                        v-text="item.user_id"></a></p>
+                                <p class="p">下载时间：{{item.updated_at}}</p>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            </li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>点击展开全部模板</summary>
+                        <ul class="list">
+                            <li v-for="item in ewmList">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                    <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
+                                </a>
+                                <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
+                                        v-text="item.user_id"></a></p>
+                                <p class="p">下载时间：{{item.updated_at}}</p>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            </li>
+                        </ul>
+                    </details>
+
+
+
+
+                </div>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="http://cdn.cdnjs.net/vue/2.5.2/vue.js"></script>
+    <script src="http://cdn.cdnjs.net/axios/0.17.0/axios.min.js"></script>
+    <script src="http://cdn.cdnjs.net/zepto/1.2.0/zepto.min.js"></script>
+    <script src="./test.js"></script>
+
+</body>
+
+</html>
