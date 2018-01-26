@@ -7,11 +7,17 @@ var $http = axios.create({
 
 //返回的是对象形式的参数  
 function getDate() {
-    var args = new Object();
     var query = location.search.substring(1);//获取查询串  
-    var pairs = query.split("=");// 
-    const date = pairs[1].replace(/-/g, '/');
-    const timestamp = new Date(date).getTime();
+    let timestamp = 0;
+    if (!query) {
+        timestamp = new Date().getTime();
+        timestamp = timestamp.toString().substring(0, 5) + '00000000'
+    } else {
+        var pairs = query.split("=");// 
+        const date = pairs[1].replace(/-/g, '/');
+        timestamp = new Date(date).getTime();
+        console.log(timestamp)
+    }
 
     return Number(timestamp.toString().substring(0, 10));
 }
