@@ -268,13 +268,13 @@
         <div id="content">
             <div class="left">
                 <div class="list-section">
-                    <h3 class="title on">全部统计</h3>
+                    <h3 class="title on">当日统计</h3>
                     <ul>
                         <li>
                             <p>模板数量： <span v-text="list.length"></span>张</p>
                         </li>
                         <li>
-                            <p>更新时间： <span>2018/01/25 19:00</span></p>
+                            <p>更新时间： <span>2018/01/26 12:00</span></p>
                         </li>
                     </ul>
 
@@ -316,11 +316,11 @@
             <div class="right">
 
                 <div>
-                    <h2 class="h2">No.1 模板 <span>| 共使用了 {{max3[1].count}} 次</span></h2>
+                    <h2 class="h2">No.1 模板 <span v-if="max3.length">| 共使用了 {{max3[1].count}} 次</span></h2>
                     <div class="h2-desc">
                         <ul>
                             <li>
-                                模板ID：<span><a target="_blank">{{max3[1].el}}</a></span>
+                                模板ID：<span v-if="max3.length"><a target="_blank">{{max3[1].el}}</a></span>
                             </li>
                         </ul>
                     </div>
@@ -328,21 +328,21 @@
 
                     <ul class="list">
                         <li v-for="item in max1List">
-                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                 <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                             </a>
                             <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                     v-text="item.user_id"></a></p>
                             <p class="p">下载时间：{{item.updated_at}}</p>
-                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                         </li>
                     </ul>
 
-                    <h2 class="h2">No.2 模板 <span>| 共使用了 {{max3[2].count}} 次</span></h2>
+                    <h2 class="h2">No.2 模板 <span v-if="max3.length">| 共使用了 {{max3[2].count}} 次</span></h2>
                     <div class="h2-desc">
                         <ul>
                             <li>
-                                模板ID：<span><a target="_blank">{{max3[2].el}}</a></span>
+                                模板ID：<span v-if="max3.length"><a target="_blank">{{max3[2].el}}</a></span>
                             </li>
                         </ul>
                     </div>
@@ -350,22 +350,22 @@
 
                     <ul class="list">
                         <li v-for="item in max2List">
-                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                 <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                             </a>
                             <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                     v-text="item.user_id"></a></p>
                             <p class="p">下载时间：{{item.updated_at}}</p>
-                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                         </li>
                     </ul>
 
 
-                    <h2 class="h2">No.3 模板 <span>| 共使用了 {{max3[3].count}} 次</span></h2>
+                    <h2 class="h2">No.3 模板 <span v-if="max3.length">| 共使用了 {{max3[3].count}} 次</span></h2>
                     <div class="h2-desc">
                         <ul>
                             <li>
-                                模板ID：<span><a target="_blank">{{max3[3].el}}</a></span>
+                                模板ID：<span v-if="max3.length"><a target="_blank">{{max3[3].el}}</a></span>
                             </li>
                         </ul>
                     </div>
@@ -373,35 +373,35 @@
 
                     <ul class="list">
                         <li v-for="item in max3List">
-                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                 <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                             </a>
                             <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                     v-text="item.user_id"></a></p>
                             <p class="p">下载时间：{{item.updated_at}}</p>
-                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                         </li>
                     </ul>
 
 
-                    <h2 class="h2">No.1 模板 <span>| 共使用了 {{max3[4].count}} 次</span></h2>
+                    <h2 class="h2">No.1 模板 <span v-if="max3.length">| 共使用了 {{max3[4].count}} 次</span></h2>
                     <div class="h2-desc">
                         <ul>
                             <li>
-                                模板ID：<span><a target="_blank">{{max3[4].el}}</a></span>
+                                模板ID：<span v-if="max3.length"><a target="_blank">{{max3[4].el}}</a></span>
                             </li>
                         </ul>
                     </div>
 
                     <ul class="list">
                         <li v-for="item in max4List">
-                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                            <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                 <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                             </a>
                             <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                     v-text="item.user_id"></a></p>
                             <p class="p">下载时间：{{item.updated_at}}</p>
-                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                            <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                         </li>
                     </ul>
 
@@ -417,13 +417,13 @@
                         <summary>点击展开全部模板</summary>
                         <ul class="list">
                             <li v-for="item in ztList">
-                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                     <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                                 </a>
                                 <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                         v-text="item.user_id"></a></p>
                                 <p class="p">下载时间：{{item.updated_at}}</p>
-                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                             </li>
                         </ul>
                     </details>
@@ -435,13 +435,13 @@
                         <summary>点击展开全部模板</summary>
                         <ul class="list">
                             <li v-for="item in bannerList">
-                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                     <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                                 </a>
                                 <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                         v-text="item.user_id"></a></p>
                                 <p class="p">下载时间：{{item.updated_at}}</p>
-                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                             </li>
                         </ul>
                     </details>
@@ -453,13 +453,13 @@
                         <summary>点击展开全部模板</summary>
                         <ul class="list">
                             <li v-for="item in stList">
-                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                     <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                                 </a>
                                 <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                         v-text="item.user_id"></a></p>
                                 <p class="p">下载时间：{{item.updated_at}}</p>
-                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                             </li>
                         </ul>
                     </details>
@@ -469,13 +469,13 @@
                         <summary>点击展开全部模板</summary>
                         <ul class="list">
                             <li v-for="item in ctList">
-                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                     <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                                 </a>
                                 <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                         v-text="item.user_id"></a></p>
                                 <p class="p">下载时间：{{item.updated_at}}</p>
-                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                             </li>
                         </ul>
                     </details>
@@ -486,13 +486,13 @@
                         <summary>点击展开全部模板</summary>
                         <ul class="list">
                             <li v-for="item in sjList">
-                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                     <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                                 </a>
                                 <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                         v-text="item.user_id"></a></p>
                                 <p class="p">下载时间：{{item.updated_at}}</p>
-                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                             </li>
                         </ul>
                     </details>
@@ -502,13 +502,13 @@
                         <summary>点击展开全部模板</summary>
                         <ul class="list">
                             <li v-for="item in ewmList">
-                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" target="_blank">
+                                <a class="img-wrapper" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" target="_blank">
                                     <p :style="{'background-image':'url(' + item.preview.url + '?imageView2/2/w/360)'}"></p>
                                 </a>
                                 <p class="p">用户ID： <a class="userId" target="_blank" :url="'https://mmmm.gaoding.com/users/templets?page_num=1&page_size=20&downloaded=all&user_ids='+item.user_id"
                                         v-text="item.user_id"></a></p>
                                 <p class="p">下载时间：{{item.updated_at}}</p>
-                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.id + '&mode=user'" v-text="'#' + item.id"></a>
+                                <a class="id" target="_blank" :href="'https://www.gaoding.com/design?id=' + item.history_id + '&mode=user'" v-text="'#' + item.history_id"></a>
                             </li>
                         </ul>
                     </details>
@@ -530,6 +530,7 @@
     <script src="https://cdn.cdnjs.net/vue/2.5.2/vue.js"></script>
     <script src="https://cdn.cdnjs.net/axios/0.17.0/axios.min.js"></script>
     <script src="https://cdn.cdnjs.net/zepto/1.2.0/zepto.min.js"></script>
+    <script src="./js/bmob-min.js"></script>
     <script src="./test.js"></script>
 
 </body>
