@@ -115,8 +115,9 @@ window.app = new Vue({
             if (!this.list.length) return;
             const maxArr = [];
             this.updateTime = timeConvert(Number(this.list[0]['attributes']['created_at'] + '000'), 'y/m/d h:m');
-
-            this.list.map(({ attributes }, idx) => {
+            list = JSON.parse(JSON.stringify(this.list)).reverse();
+            console.log(list);
+            list.map((attributes, idx) => {
                 attributes.updated_at = timeConvert(Number(attributes.updated_at + '000'), 'h:m');
                 // 统计平台和分类
                 if (attributes.platform_id === 32) {
@@ -139,12 +140,8 @@ window.app = new Vue({
                 // 统计最多的模板ID
                 maxArr.push(attributes.source_id);
             });
-
-
-
-
             this.max3 = getCount(maxArr, 5);
-            this.list.map(({ attributes }, idx) => {
+            list.map((attributes, idx) => {
                 // 统计平台和分类
                 if (attributes.source_id.toString() === this.max3[1].el) {
                     this.max1List.push(attributes);
@@ -156,14 +153,9 @@ window.app = new Vue({
                     this.max4List.push(attributes);
                 }
             });
-
-
-
         }
     },
     created: function () {
-
-
         var HistoryScore = Bmob.Object.extend("history");
         var query = new Bmob.Query(HistoryScore);
         query.limit(1000);
@@ -175,59 +167,8 @@ window.app = new Vue({
                 console.log("查询失败: " + error.code + " " + error.message);
             }
         });
-
-
-        // // 测试插入数据
-        // this.list.map((item, idx) => {
-        //     var gameScore = new HistoryScore();
-        //     var query = new Bmob.Query(HistoryScore);
-        //     query.equalTo("history_id", item.id);
-        //     query.find({
-        //         success: (results) => {
-        //             console.log(results);
-        //             if (!results.length) {
-        //                 item['history_id'] = item.id;
-        //                 delete item['id'];
-        //                 delete item['preview_lock'];
-        //                 delete item['rules_count'];
-        //                 delete item['image_width'];
-        //                 delete item['image_height'];
-        //                 delete item['download_count'];
-        //                 delete item['businesses'];
-        //                 delete item['flags'];
-        //                 delete item['solar_term'];
-        //                 delete item['last_save_ip'];
-        //                 delete item['priority'];
-        //                 delete item['festivals'];
-        //                 delete item['ratios'];
-        //                 delete item['roles'];
-        //                 delete item['features'];
-        //                 delete item['ratios'];
-        //                 delete item['type'];
-        //                 delete item['colors'];
-        //                 delete item['styles'];
-        //                 if (typeof item['preview'] !== "object") {
-        //                     item['preview'] = {}
-        //                 }
-        //                 gameScore.save(item, {
-        //                     success: function (object) {
-        //                         console.log("create object success, object id:", object.id);
-        //                     },
-        //                     error: function (gameScore, error) {
-        //                         console.log("create object fail", error);
-        //                     }
-        //                 });
-        //             }
-        //         },
-        //         error: (error) => {
-        //             console.log("查询失败: " + error.code + " " + error.message);
-        //         }
-        //     });
-        // });
-
     }
 })
-
 
 
 
