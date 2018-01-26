@@ -5,6 +5,26 @@ var $http = axios.create({
     headers: { 'origin': 'https://mmmm.gaoding.com', 'content-type': 'application/json;charset=UTF-8', }
 });
 
+//返回的是对象形式的参数  
+function getDate() {
+    var args = new Object();
+    var query = location.search.substring(1);//获取查询串  
+    var pairs = query.split("=");// 
+    const date = pairs[1].replace(/-/g, '/');
+    const timestamp = new Date(date).getTime();
+
+    return Number(timestamp.toString().substring(0, 10));
+}
+
+function dateEnd(date) {
+    let dateEnd = new Date(Number(date + '000'));
+    dateEnd.setDate(dateEnd.getDate() + 1);
+    const timestamp = dateEnd.getTime();
+
+    return Number(timestamp.toString().substring(0, 10));
+}
+
+
 // 计算出最多的模板
 function getCount(arr, rank, ranktype) {
     var obj = {}, k, arr1 = [];
@@ -116,7 +136,6 @@ window.app = new Vue({
             const maxArr = [];
             this.updateTime = timeConvert(Number(this.list[0]['attributes']['created_at'] + '000'), 'y/m/d h:m');
             list = JSON.parse(JSON.stringify(this.list)).reverse();
-            console.log(list);
             list.map((attributes, idx) => {
                 attributes.updated_at = timeConvert(Number(attributes.updated_at + '000'), 'h:m');
                 // 统计平台和分类
@@ -143,21 +162,27 @@ window.app = new Vue({
             this.max3 = getCount(maxArr, 5);
             list.map((attributes, idx) => {
                 // 统计平台和分类
-                if (attributes.source_id.toString() === this.max3[1].el) {
+                if (this.max3.length > 0 && attributes.source_id.toString() === this.max3[0].el) {
                     this.max1List.push(attributes);
-                } else if (attributes.source_id.toString() === this.max3[2].el) {
+                } else if (this.max3.length > 1 && attributes.source_id.toString() === this.max3[1].el) {
                     this.max2List.push(attributes);
-                } else if (attributes.source_id.toString() === this.max3[3].el) {
+                } else if (this.max3.length > 2 && attributes.source_id.toString() === this.max3[2].el) {
                     this.max3List.push(attributes);
-                } else if (attributes.source_id.toString() === this.max3[4].el) {
+                } else if (this.max3.length > 3 && attributes.source_id.toString() === this.max3[3].el) {
                     this.max4List.push(attributes);
                 }
             });
         }
     },
     created: function () {
-        var HistoryScore = Bmob.Object.extend("history");
-        var query = new Bmob.Query(HistoryScore);
+        const date = getDate();
+        const endDate = dateEnd(date);
+
+        const HistoryScore = Bmob.Object.extend("history");
+        const query = new Bmob.Query(HistoryScore);
+        query.greaterThan("created_at", date);
+        query.lessThan("created_at", endDate);
+
         query.limit(1000);
         query.find({
             success: (results) => {
@@ -167,6 +192,10 @@ window.app = new Vue({
                 console.log("查询失败: " + error.code + " " + error.message);
             }
         });
+
+
+
+
     }
 })
 
