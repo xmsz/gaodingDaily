@@ -101,21 +101,22 @@ window.app = new Vue({
         ctList: [],
         sjList: [],
         ewmList: [],
-
         max3: [],
         max1List: [],
         max2List: [],
         max3List: [],
         max4List: [],
-
+        updateTime: '',
+    },
+    computed: {
     },
     watch: {
         list: function () {
             if (!this.list.length) return;
             const maxArr = [];
+            this.updateTime = timeConvert(Number(this.list[0]['attributes']['created_at'] + '000'), 'y/m/d h:m');
+
             this.list.map(({ attributes }, idx) => {
-                // attributes['preview'] = JSON.parse(attributes['preview']);
-                console.log(attributes);
                 attributes.updated_at = timeConvert(Number(attributes.updated_at + '000'), 'h:m');
                 // 统计平台和分类
                 if (attributes.platform_id === 32) {
@@ -155,6 +156,8 @@ window.app = new Vue({
                     this.max4List.push(attributes);
                 }
             });
+
+
 
         }
     },
