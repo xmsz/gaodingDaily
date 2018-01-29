@@ -84,13 +84,9 @@ def bomb_query_first(table_name,app_id = APP_ID,rest_api_key = REST_API_KEY):
     return None
 
 def postData(list):
-
-    # 获取最后一条ID
-   lastTime = bomb_query_first('history')['results'][0]['history_id'];
- # lastTime = 1;
+    lastTime = bomb_query_first('history')['results'][0]['history_id'];
 
 
-       
     for item in list:
         if item['id'] > lastTime:
             resp = bomb_query(table_name = 'history', history_id = str(item['id']))
@@ -133,7 +129,7 @@ def login_baidu():
     data = 'username=xiangyu&password=qqqqqq'
     login = session.post('https://mmmm.gaoding.com/api/sessions', data=data, headers=headers)
     print(login)
-    listData = session.get('https://mmmm.gaoding.com/api/users/templets?page_num=1&page_size=1000')
+    listData = session.get('https://mmmm.gaoding.com/api/users/templets?page_num=1&page_size=100')
     list = json.loads(listData.text);
     postData(list = list)
 

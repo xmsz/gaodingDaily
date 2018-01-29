@@ -4,76 +4,22 @@ var $http = axios.create({
     timeout: 1000,
     headers: { 'origin': 'https://mmmm.gaoding.com', 'content-type': 'application/json;charset=UTF-8', }
 });
-
-//返回的是对象形式的参数  
-function getDate() {
-    var query = location.search.substring(1);//获取查询串  
-    let timestamp = 0;
-    if (!query) {
-        timestamp = new Date().getTime();
-        timestamp = timestamp.toString().substring(0, 5) + '00000000'
-    } else {
-        var pairs = query.split("=");// 
-        const date = pairs[1].replace(/-/g, '/');
-        timestamp = new Date(date).getTime();
-        console.log(timestamp)
-    }
-
-    return Number(timestamp.toString().substring(0, 10));
-}
-
-function dateEnd(date) {
-    let dateEnd = new Date(Number(date + '000'));
-    dateEnd.setDate(dateEnd.getDate() + 1);
-    const timestamp = dateEnd.getTime();
-
-    return Number(timestamp.toString().substring(0, 10));
-}
-
-
-// 计算出最多的模板
-function getCount(arr, rank, ranktype) {
-    var obj = {}, k, arr1 = [];
-    for (var i = 0, len = arr.length; i < len; i++) {
-        k = arr[i];
-        if (obj[k])
-            obj[k]++;
-        else
-            obj[k] = 1;
-    }
-    //保存结果{el-'元素'，count-出现次数}
-    for (var o in obj) {
-        arr1.push({ el: o, count: obj[o] });
-    }
-    //排序（降序）
-    arr1.sort(function (n1, n2) {
-        return n2.count - n1.count
-    });
-    //如果ranktype为1，则为升序，反转数组
-    if (ranktype === 1) {
-        arr1 = arr1.reverse();
-    }
-    var rank1 = rank || arr1.length;
-    return arr1.slice(0, rank1);
-}
-
-
-function timeConvert(time, type = 'y/m/d h:m', zero = true) {
+function $timeConvert(time, type = 'Y/M/D h:m', zero = true) {
     let result = '';
     const now = new Date(time);
     const weekCn = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
     const getWeekCn = (week) => weekCn[week];
     const nowArray = [
         {
-            name: 'y',
+            name: 'Y',
             val: now.getFullYear(),
         },
         {
-            name: 'm',
+            name: 'M',
             val: now.getMonth() + 1,
         },
         {
-            name: 'd',
+            name: 'D',
             val: now.getDate(),
         },
         {
@@ -115,6 +61,73 @@ function timeConvert(time, type = 'y/m/d h:m', zero = true) {
     return result;
 };
 
+//返回的是对象形式的参数  
+function getDate() {
+    const nowDate = new Date();
+    let startDate = null;
+    let endDate = null;
+    const query = location.search.substring(1);//获取查询串  
+    if (!query) {
+        startDate = new Date(
+            nowDate.getFullYear(),
+            nowDate.getMonth(),
+            nowDate.getDate(),
+        ).getTime();
+        window.location.href = window.location.href + `?date=${$timeConvert(startDate, type = 'Y-M-D')}`
+        endDate = dateEnd(nowDate);
+    } else {
+        const pairs = query.split("=");
+        if (pairs[1] === 'all') {
+            startDate = 1000000000000;
+            endDate = dateEnd(2000000000000);
+        } else {
+            const date = pairs[1].replace(/-/g, '/');
+            startDate = new Date(date).getTime();
+            endDate = dateEnd(date);
+        }
+    }
+
+    return {
+        startDate: Number(startDate.toString().substring(0, 10)),
+        endDate: Number(endDate.toString().substring(0, 10)),
+    };
+}
+
+function dateEnd(date) {
+    let dateEnd = new Date(date);
+    dateEnd.setDate(dateEnd.getDate() + 1);
+    return dateEnd.getTime();
+}
+
+
+// 计算出最多的模板
+function getCount(arr, rank, ranktype) {
+    var obj = {}, k, arr1 = [];
+    for (var i = 0, len = arr.length; i < len; i++) {
+        k = arr[i];
+        if (obj[k])
+            obj[k]++;
+        else
+            obj[k] = 1;
+    }
+    //保存结果{el-'元素'，count-出现次数}
+    for (var o in obj) {
+        arr1.push({ el: o, count: obj[o] });
+    }
+    //排序（降序）
+    arr1.sort(function (n1, n2) {
+        return n2.count - n1.count
+    });
+    //如果ranktype为1，则为升序，反转数组
+    if (ranktype === 1) {
+        arr1 = arr1.reverse();
+    }
+    var rank1 = rank || arr1.length;
+    return arr1.slice(0, rank1);
+}
+
+
+
 
 window.app = new Vue({
     el: '#app',
@@ -140,10 +153,10 @@ window.app = new Vue({
         list: function () {
             if (!this.list.length) return;
             const maxArr = [];
-            this.updateTime = timeConvert(Number(this.list[0]['attributes']['created_at'] + '000'), 'y/m/d h:m');
+            this.updateTime = $timeConvert(Number(this.list[0]['attributes']['created_at'] + '000'), 'Y/M/D h:m');
             list = JSON.parse(JSON.stringify(this.list)).reverse();
             list.map((attributes, idx) => {
-                attributes.updated_at = timeConvert(Number(attributes.updated_at + '000'), 'h:m');
+                attributes.updated_at = $timeConvert(Number(attributes.updated_at + '000'), 'h:m');
                 // 统计平台和分类
                 if (attributes.platform_id === 32) {
                     if (attributes.categories === 1) {
@@ -163,7 +176,7 @@ window.app = new Vue({
                     }
                 }
                 // 统计最多的模板ID
-                maxArr.push(attributes.source_id);
+                if (attributes.source_id) maxArr.push(attributes.source_id);
             });
             this.max3 = getCount(maxArr, 5);
             list.map((attributes, idx) => {
@@ -181,23 +194,42 @@ window.app = new Vue({
         }
     },
     created: function () {
-        const date = getDate();
-        const endDate = dateEnd(date);
 
+        const { startDate, endDate } = getDate();
         const HistoryScore = Bmob.Object.extend("history");
         const query = new Bmob.Query(HistoryScore);
-        query.greaterThan("created_at", date);
+        let list = [];
+        query.greaterThan("created_at", startDate);
         query.lessThan("created_at", endDate);
+        query.limit(500);
 
-        query.limit(1000);
-        query.find({
-            success: (results) => {
-                this.list = results
+        query.count({
+            success: (count) => {
+                // 查询成功，返回记录数量
+                console.log("共有 " + count + " 条记录");
+                if (count > 500) {
+                    for (var i = 0; i < Math.ceil(count / 500); i++) {
+                        query.skip(i * 500)
+                        query.find({
+                            success: (results) => {
+                                list.push.apply(list, results);
+                                this.list = list;
+                            }
+                        });
+                    }
+                }
+                query.find({
+                    success: (results) => {
+                        this.list = results;
+                    }
+                });
             },
             error: (error) => {
-                console.log("查询失败: " + error.code + " " + error.message);
+                // 查询失败
             }
         });
+
+
 
 
 
