@@ -184,6 +184,20 @@ window.app = new Vue({
         list: function () {
             if (!this.list.length) return;
             const maxArr = [];
+            this.maxArr = [];
+            this.max1List = [];
+            this.max2List = [];
+            this.max3List = [];
+            this.max4List = [];
+            this.ztList = [];
+            this.bannerList = [];
+            this.bannerList = [];
+            this.stList = [];
+            this.ctList = [];
+            this.ctList = [];
+            this.sjList = [];
+            this.ewmList = [];
+
             this.updateTime = $timeConvert(Number(this.list[0]['attributes']['created_at'] + '000'), 'Y/M/D h:m');
             list = JSON.parse(JSON.stringify(this.list)).reverse();
             list.map((attributes, idx) => {
