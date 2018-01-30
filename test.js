@@ -1,8 +1,6 @@
 Bmob.initialize("1f83c3fb0dd43f84fb2e7c5b659c3d26", "e48ecaadf867fcf9dc94340b6dcf22aa");
 var $http = axios.create({
     baseURL: 'https://mmmm.gaoding.com/api/',
-    timeout: 1000,
-    headers: { 'origin': 'https://mmmm.gaoding.com', 'content-type': 'application/json;charset=UTF-8', }
 });
 function $timeConvert(time, type = 'Y/M/D h:m', zero = true) {
     let result = '';
@@ -146,6 +144,31 @@ window.app = new Vue({
         max3List: [],
         max4List: [],
         updateTime: '',
+        updateBtn: {
+            disable: false,
+            text: '更新数据'
+        },
+    },
+    methods: {
+        update: function () {
+            this.updateBtn = {
+                disable: true,
+                text: '更新中'
+            }
+            $http.get('https://apiab.zuolem.com/api/gaoDing/getHistory').then(({ data }) => {
+                console.log(data)
+                if (data.data.stderr === '') {
+                    alert('暂无更新')
+                } else {
+                    location.reload();
+                }
+                this.updateBtn = {
+                    disable: false,
+                    text: '获取更新'
+                }
+            });
+
+        }
     },
     computed: {
     },
