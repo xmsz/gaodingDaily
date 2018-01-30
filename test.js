@@ -157,7 +157,7 @@ window.app = new Vue({
             }
             $http.get('https://apiab.zuolem.com/api/gaoDing/getHistory').then(({ data }) => {
                 console.log(data)
-                if (data.data.stderr === '') {
+                if (data.data.stdout === '') {
                     alert('暂无更新')
                 } else {
                     location.reload();
