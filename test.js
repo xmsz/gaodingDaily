@@ -198,7 +198,7 @@ window.app = new Vue({
             this.sjList = [];
             this.ewmList = [];
 
-            this.updateTime = $timeConvert(Number(this.list[0]['attributes']['created_at'] + '000'), 'Y/M/D h:m');
+            this.updateTime = $timeConvert(Number(this.list[(this.length - 1)]['attributes']['created_at'] + '000'), 'Y/M/D h:m');
             list = JSON.parse(JSON.stringify(this.list)).reverse();
             list.map((attributes, idx) => {
                 attributes.updated_at = $timeConvert(Number(attributes.updated_at + '000'), 'h:m');
