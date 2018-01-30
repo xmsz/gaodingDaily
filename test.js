@@ -143,6 +143,7 @@ window.app = new Vue({
         max2List: [],
         max3List: [],
         max4List: [],
+        pageDate: '2018-01-01',
         updateTime: '',
         updateBtn: {
             disable: false,
@@ -150,6 +151,9 @@ window.app = new Vue({
         },
     },
     methods: {
+        setDateTip: function () {
+            alert('将网址中"date="后面的日期改为需要搜索的日期 \n 设置"all"则显示所有日期')
+        },
         update: function () {
             this.updateBtn = {
                 disable: true,
@@ -171,6 +175,10 @@ window.app = new Vue({
         }
     },
     computed: {
+        pageDateVal: function () {
+            const date = location.search.substring(1).split('=')[1];
+            return date === 'all' ? '全部' : date;
+        }
     },
     watch: {
         list: function () {

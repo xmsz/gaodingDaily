@@ -284,6 +284,27 @@
             box-shadow: none;
         }
 
+        .main-choose-wrapper {
+            text-align: center;
+            color: #555;
+            font-size: 21px;
+            margin: 0 0 40px 0;
+        }
+
+        .main-choose-wrapper .date {
+            font-weight: bold;
+            display: inline-block;
+            border: none;
+            font-size: 21px;
+            border-bottom: 1px solid #555;
+            margin: 0 10px;
+            color: #3a3a3a;
+            cursor: pointer;
+            padding: 0 5px 5px;
+            box-shadow: none;
+
+        }
+
         .br-10 {
             height: 10px;
         }
@@ -348,6 +369,13 @@
                 </div>
             </div>
             <div class="right">
+
+                <div class="main-choose-wrapper">
+                    当前显示
+                    <!-- <input id="chooseDate" type="date" class="date" v-model="pageDate" :value="pageDateVal" /> -->
+                    <p class="date" v-text="pageDateVal" v-on:click="setDateTip"></p>
+                    的数据
+                </div>
 
                 <div>
                     <h2 class="h2" id="most-1">No.1 模板 <span v-if="max3.length">| 共使用了 {{max3[0].count}} 次</span></h2>
